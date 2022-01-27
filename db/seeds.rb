@@ -10,18 +10,26 @@ puts '🌱 Seeding spices...'
 
 Org = Organization.create({ name: 'The Organization' })
 
-Hr = Division.create({ name: 'Human Resources', active: true })
-Finance = Division.create({ name: 'Finance', active: true })
-Legal = Division.create({ name: 'Legal', active: true })
-Marketing = Division.create({ name: 'Marketing', active: true })
+Hr =
+  Division.create(
+    { name: 'Human Resources', active: true, organization_id: Org.id },
+  )
+Finance =
+  Division.create({ name: 'Finance', active: true, organization_id: Org.id })
+Legal =
+  Division.create({ name: 'Legal', active: true, organization_id: Org.id })
+Marketing =
+  Division.create({ name: 'Marketing', active: true, organization_id: Org.id })
 Business_Development =
-  Division.create({ name: 'Business Development', active: true })
+  Division.create(
+    { name: 'Business Development', active: true, organization_id: Org.id },
+  )
 
-divisions = [Hr, Fiance, Legal, Marketing, Business_Development]
+divisions = [Hr, Finance, Legal, Marketing, Business_Development]
 topics = ['retirement', 'benefits', 'town hall', 'incentives', 'recruitment']
 locations = ['atrium', "Mike's Desk", 'Building 50', 'Downtown Courthouse']
 
-30.times do
+5.times do
   User.create(
     {
       administrator: false,
@@ -35,12 +43,89 @@ locations = ['atrium', "Mike's Desk", 'Building 50', 'Downtown Courthouse']
       extension: Faker::PhoneNumber.extension,
       active: true,
       hire_date: Faker::Date.between(from: '2014-09-23', to: '2022-01-25'),
+      division_id: Hr.id,
+    },
+  )
+end
+
+5.times do
+  User.create(
+    {
+      administrator: false,
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      division: divisions.sample,
+      email: Faker::Internet.email,
+      password: '123456',
+      position: Faker::Job.title,
+      phone: Faker::PhoneNumber.cell_phone,
+      extension: Faker::PhoneNumber.extension,
+      active: true,
+      hire_date: Faker::Date.between(from: '2014-09-23', to: '2022-01-25'),
+      division_id: Finance.id,
+    },
+  )
+end
+
+5.times do
+  User.create(
+    {
+      administrator: false,
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      division: divisions.sample,
+      email: Faker::Internet.email,
+      password: '123456',
+      position: Faker::Job.title,
+      phone: Faker::PhoneNumber.cell_phone,
+      extension: Faker::PhoneNumber.extension,
+      active: true,
+      hire_date: Faker::Date.between(from: '2014-09-23', to: '2022-01-25'),
+      division_id: Legal.id,
+    },
+  )
+end
+
+5.times do
+  User.create(
+    {
+      administrator: false,
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      division: divisions.sample,
+      email: Faker::Internet.email,
+      password: '123456',
+      position: Faker::Job.title,
+      phone: Faker::PhoneNumber.cell_phone,
+      extension: Faker::PhoneNumber.extension,
+      active: true,
+      hire_date: Faker::Date.between(from: '2014-09-23', to: '2022-01-25'),
+      division_id: Marketing.id,
+    },
+  )
+end
+
+5.times do
+  User.create(
+    {
+      administrator: false,
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      division: divisions.sample,
+      email: Faker::Internet.email,
+      password: '123456',
+      position: Faker::Job.title,
+      phone: Faker::PhoneNumber.cell_phone,
+      extension: Faker::PhoneNumber.extension,
+      active: true,
+      hire_date: Faker::Date.between(from: '2014-09-23', to: '2022-01-25'),
+      division_id: Business_Development.id,
     },
   )
 end
 
 15.times do
-  News_post.create(
+  NewsPost.create(
     {
       title: Faker::Lorem.sentence(word_count: 3),
       content: Faker::Lorem.paragraph(sentence_count: 5),
@@ -52,7 +137,7 @@ end
 end
 
 17.times do
-  Event_post.create(
+  EventPost.create(
     {
       title: Faker::Lorem.sentence(word_count: 3),
       content: Faker::Lorem.paragraph(sentence_count: 5),
