@@ -18,6 +18,8 @@ Business_Development =
   Division.create({ name: 'Business Development', active: true })
 
 divisions = [Hr, Fiance, Legal, Marketing, Business_Development]
+topics = ['retirement', 'benefits', 'town hall', 'incentives', 'recruitment']
+locations = ['atrium', "Mike's Desk", 'Building 50', 'Downtown Courthouse']
 
 30.times do
   User.create(
@@ -57,11 +59,18 @@ end
       division_target: divisions.sample,
       claps: Faker::Number.within(range: 1..300),
       clicks: Faker::Number.within(range: 1..300),
-      topic:
+      topic: topics.sample,
+      event_date: Faker::Date.between(from: '2022-02-18', to: '2022-3-25'),
+      event_time:
+        Faker::Time.between(
+          from: DateTime.now - 1,
+          to: DateTime.now,
+          format: :long,
+        ),
+      event_allday: false,
+      event_location: locations.sample,
     },
   )
 end
-
-
 
 puts '✅ Done seeding!'
