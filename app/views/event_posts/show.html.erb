@@ -1,0 +1,74 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date created:</strong>
+  <%= @event_post.date_created %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @event_post.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @event_post.content %>
+</p>
+
+<p>
+  <strong>Event date:</strong>
+  <%= @event_post.event_date %>
+</p>
+
+<p>
+  <strong>Event time:</strong>
+  <%= @event_post.event_time %>
+</p>
+
+<p>
+  <strong>Event allday:</strong>
+  <%= @event_post.event_allday %>
+</p>
+
+<p>
+  <strong>Event location:</strong>
+  <%= @event_post.event_location %>
+</p>
+
+<p>
+  <strong>Division target:</strong>
+  <%= @event_post.division_target %>
+</p>
+
+<p>
+  <strong>Avatar:</strong>
+  <%= link_to @event_post.avatar.filename, @event_post.avatar if @event_post.avatar.attached? %>
+</p>
+
+<p>
+  <strong>Topic:</strong>
+  <%= @event_post.topic %>
+</p>
+
+<p>
+  <strong>Claps:</strong>
+  <%= @event_post.claps %>
+</p>
+
+<p>
+  <strong>Clicks:</strong>
+  <%= @event_post.clicks %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @event_post.user_id %>
+</p>
+
+<p>
+  <strong>Division:</strong>
+  <%= @event_post.division_id %>
+</p>
+
+<%= link_to 'Edit', edit_event_post_path(@event_post) %> |
+<%= link_to 'Back', event_posts_path %>

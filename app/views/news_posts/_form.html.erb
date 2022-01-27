@@ -1,0 +1,62 @@
+<%= form_with(model: news_post) do |form| %>
+  <% if news_post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(news_post.errors.count, "error") %> prohibited this news_post from being saved:</h2>
+
+      <ul>
+        <% news_post.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :date_created %>
+    <%= form.text_field :date_created %>
+  </div>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_field :content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :division_target %>
+    <%= form.text_field :division_target %>
+  </div>
+
+  <div class="field">
+    <%= form.label :avatar %>
+    <%= form.file_field :avatar %>
+  </div>
+
+  <div class="field">
+    <%= form.label :claps %>
+    <%= form.number_field :claps %>
+  </div>
+
+  <div class="field">
+    <%= form.label :clicks %>
+    <%= form.number_field :clicks %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :division_id %>
+    <%= form.text_field :division_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

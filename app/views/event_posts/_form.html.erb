@@ -1,0 +1,87 @@
+<%= form_with(model: event_post) do |form| %>
+  <% if event_post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(event_post.errors.count, "error") %> prohibited this event_post from being saved:</h2>
+
+      <ul>
+        <% event_post.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :date_created %>
+    <%= form.text_field :date_created %>
+  </div>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_field :content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :event_date %>
+    <%= form.date_select :event_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :event_time %>
+    <%= form.time_select :event_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :event_allday %>
+    <%= form.check_box :event_allday %>
+  </div>
+
+  <div class="field">
+    <%= form.label :event_location %>
+    <%= form.text_field :event_location %>
+  </div>
+
+  <div class="field">
+    <%= form.label :division_target %>
+    <%= form.text_field :division_target %>
+  </div>
+
+  <div class="field">
+    <%= form.label :avatar %>
+    <%= form.file_field :avatar %>
+  </div>
+
+  <div class="field">
+    <%= form.label :topic %>
+    <%= form.text_field :topic %>
+  </div>
+
+  <div class="field">
+    <%= form.label :claps %>
+    <%= form.number_field :claps %>
+  </div>
+
+  <div class="field">
+    <%= form.label :clicks %>
+    <%= form.number_field :clicks %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :division_id %>
+    <%= form.text_field :division_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

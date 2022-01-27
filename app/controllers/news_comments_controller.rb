@@ -1,0 +1,2 @@
+class NewsCommentsController < ApplicationController
+end

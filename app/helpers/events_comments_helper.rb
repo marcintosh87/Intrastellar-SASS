@@ -1,0 +1,2 @@
+module EventsCommentsHelper
+end
