@@ -1,6 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Avatar:</strong>
+  <% if @user.avatar.attached? %>
+    <%= image_tag @user.avatar, width: "200px" %>
+  <% end %>
+</p>
+<p>
   <strong>Administrator:</strong>
   <%= @user.administrator %>
 </p>
@@ -35,10 +41,7 @@
   <%= @user.position %>
 </p>
 
-<p>
-  <strong>Division:</strong>
-  <%= @user.division %>
-</p>
+
 
 <p>
   <strong>Phone:</strong>

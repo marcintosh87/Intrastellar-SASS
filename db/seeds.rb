@@ -28,7 +28,23 @@ Business_Development =
 divisions = [Hr, Finance, Legal, Marketing, Business_Development]
 topics = ['retirement', 'benefits', 'town hall', 'incentives', 'recruitment']
 locations = ['atrium', "Mike's Desk", 'Building 50', 'Downtown Courthouse']
-
+Marcos =
+  User.create(
+    {
+      administrator: true,
+      first_name: 'Marcos',
+      last_name: 'Lopez',
+      division: Hr,
+      email: 'marcos@company.com',
+      password: '123456',
+      position: 'VP of HR',
+      phone: Faker::PhoneNumber.cell_phone,
+      extension: Faker::PhoneNumber.extension,
+      active: true,
+      hire_date: Faker::Date.between(from: '2014-09-23', to: '2022-01-25'),
+      division_id: Hr.id,
+    },
+  )
 5.times do
   User.create(
     {
@@ -132,6 +148,8 @@ end
       division_target: divisions.sample,
       claps: Faker::Number.within(range: 1..300),
       clicks: Faker::Number.within(range: 1..300),
+      division_id: Hr.id,
+      user_id: Marcos.id,
     },
   )
 end
@@ -154,6 +172,8 @@ end
         ),
       event_allday: false,
       event_location: locations.sample,
+      division_id: Hr.id,
+      user_id: Marcos.id,
     },
   )
 end
