@@ -42,20 +42,26 @@ class NewsPostsController < ApplicationController
 
   # PATCH/PUT /news_posts/1 or /news_posts/1.json
   def update
-    respond_to do |format|
-      if @news_post.update(news_post_params)
-        format.html do
-          redirect_to news_post_url(@news_post),
-                      notice: 'News post was successfully updated.'
-        end
-        format.json { render :show, status: :ok, location: @news_post }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json do
-          render json: @news_post.errors, status: :unprocessable_entity
-        end
-      end
-    end
+    
+    @news_post.update(news_post_params)
+      render json: @news_post
+      
+   
+
+    # respond_to do |format|
+    #   if @news_post.update(news_post_params)
+    #     format.html do
+    #       redirect_to news_post_url(@news_post),
+    #                   notice: 'News post was successfully updated.'
+    #     end
+    #     format.json { render :show, status: :ok, location: @news_post }
+    #   else
+    #     format.html { render :edit, status: :unprocessable_entity }
+    #     format.json do
+    #       render json: @news_post.errors, status: :unprocessable_entity
+    #     end
+    #   end
+    # end
   end
 
   # DELETE /news_posts/1 or /news_posts/1.json

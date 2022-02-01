@@ -25,7 +25,7 @@ const styles = {
   },
 };
 
-export default function Newsfeed({ newsPost }) {
+export default function Newsfeed({ newsPost, refresh, setRefresh }) {
   const [filter, setFilter] = useState("Sort by");
   const [search, setSearch] = useState("");
 
@@ -37,9 +37,6 @@ export default function Newsfeed({ newsPost }) {
     setSearch(event.target.value);
   };
 
-  const handleClaps = (e) => {
-    "";
-  };
   return (
     <>
       <section style={styles.paperContainer}>
@@ -158,6 +155,8 @@ export default function Newsfeed({ newsPost }) {
                 claps={post.claps}
                 image={post.image_post}
                 date={post.date}
+                setRefresh={setRefresh}
+                refresh={refresh}
               />
             ))}
         </Box>

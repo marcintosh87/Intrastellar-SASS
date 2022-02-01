@@ -29,12 +29,13 @@ const theme = createTheme({
 });
 function App() {
   const [newsPost, setNewsPost] = useState([]);
+  const [refresh, setRefresh] = useState(0);
 
   useEffect(() => {
     fetch(`/news_posts`)
       .then((res) => res.json())
       .then(setNewsPost);
-  }, []);
+  }, [refresh]);
   return (
     <div className="App">
       {/* To modify this theme change the props in the theme variable */}
@@ -42,7 +43,16 @@ function App() {
         <Navbar />
         {/* Main content Start */}
         <Routes>
-          <Route path="/" element={<Newsfeed newsPost={newsPost} />} />
+          <Route
+            path="/"
+            element={
+              <Newsfeed
+                newsPost={newsPost}
+                setRefresh={setRefresh}
+                refresh={refresh}
+              />
+            }
+          />
           <Route
             path="/news-article/:id"
             element={<NewsArticle newsPost={newsPost} />}
