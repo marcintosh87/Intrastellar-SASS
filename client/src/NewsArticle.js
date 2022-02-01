@@ -2,11 +2,7 @@ import {
   Button,
   Container,
   Divider,
-  FormControl,
   Grid,
-  InputLabel,
-  MenuItem,
-  Select,
   TextField,
   Typography,
 } from "@mui/material";
@@ -16,9 +12,13 @@ import { useParams } from "react-router-dom";
 import clap from "./images/blue-clap.png";
 import comment from "./images/comment-icon.png";
 import NewsCard from "./NewsCard";
+import SendIcon from "@mui/icons-material/Send";
+import CommentCard from "./CommentCard";
 
 export default function NewsArticle({ newsPost }) {
   const [article, setArticle] = useState([]);
+  const [value, setValue] = useState("");
+
   const params = useParams();
 
   useEffect(() => {
@@ -36,6 +36,10 @@ export default function NewsArticle({ newsPost }) {
       backgroundRepeat: "no-repeat",
       margin: "0 auto",
     },
+  };
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
   };
   return (
     <Box>
@@ -57,7 +61,7 @@ export default function NewsArticle({ newsPost }) {
                 <img src={clap} alt="clap-icon" style={{ width: 20 }} />
                 {article.claps}
               </Button>
-              <Button>
+              <Button href="#news_comments">
                 <img
                   src={comment}
                   alt="clap-icon"
@@ -115,6 +119,44 @@ export default function NewsArticle({ newsPost }) {
                 date={post.date}
               />
             ))}
+        <Grid container rowSpacing={4} my={4}>
+          <Grid item xs={6}>
+            <Typography variant="h5" align="left" color={"primary"}>
+              Comments
+            </Typography>
+
+            {article.news_comments && (
+              <Box id="news_comments">
+                {article.news_comments.map((each) => (
+                  <CommentCard
+                    key={each.id}
+                    comment={each.comment}
+                    user={each.user_id}
+                  />
+                ))}
+              </Box>
+            )}
+          </Grid>
+          <Grid item xs={6} sx={{ textAlign: "left" }}>
+            <Typography variant="h5" align="left" color={"primary"}>
+              Post a Comment
+            </Typography>
+            <TextField
+              id="outlined-multiline-static"
+              label="Comment"
+              multiline
+              rows={4}
+              onChange={handleChange}
+              fullWidth
+              sx={{ width: "80%", mt: 2 }}
+            />
+            <Box mt={1}>
+              <Button type="submit" variant="contained" endIcon={<SendIcon />}>
+                Send
+              </Button>
+            </Box>
+          </Grid>
+        </Grid>
       </Box>
     </Box>
   );

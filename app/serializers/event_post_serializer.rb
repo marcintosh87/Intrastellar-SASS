@@ -13,6 +13,7 @@ class EventPostSerializer < ActiveModel::Serializer
 
   belongs_to :user
   belongs_to :division
+  has_many :news_comments
 
   def created_date
     return self.object.created_at.strftime('%m-%d-%Y')

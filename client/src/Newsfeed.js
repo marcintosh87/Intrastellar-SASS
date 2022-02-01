@@ -57,19 +57,21 @@ export default function Newsfeed({ newsPost, refresh, setRefresh }) {
           </Grid>
 
           <Grid item xs={1}></Grid>
-          <Grid item xs={5} sx={{ mt: 4 }}>
-            <Typography variant="body1" color={"white"}>
+          <Grid item xs={5} sx={{ mt: 4 }} justifyContent="center">
+            <Typography variant="body1" color={"white"} align="center">
               We are an outstanding collective of caregivers representing
               various cultures, beliefs, backgrounds, and life experiences.
             </Typography>
-            <Button
-              size="small"
-              variant="contained"
-              color={"white"}
-              sx={{ mt: 1, borderRadius: 16, boxShadow: 0 }}
-            >
-              <span style={{ color: "#999999" }}>Learn More</span>
-            </Button>
+            <Box sx={{ textAlign: "center" }}>
+              <Button
+                size="small"
+                variant="contained"
+                color={"white"}
+                sx={{ mt: 1, borderRadius: 16, boxShadow: 0 }}
+              >
+                <span style={{ color: "#999999" }}>Learn More</span>
+              </Button>
+            </Box>
           </Grid>
           <Grid item xs={1}></Grid>
         </Grid>
