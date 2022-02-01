@@ -6,6 +6,8 @@ import { ThemeProvider } from "@emotion/react";
 import Footer from "./Footer";
 import { Route, Routes } from "react-router-dom";
 import Newsfeed from "./Newsfeed";
+import NewsArticle from "./NewsArticle";
+import { useEffect, useState } from "react";
 
 const theme = createTheme({
   palette: {
@@ -26,6 +28,13 @@ const theme = createTheme({
   },
 });
 function App() {
+  const [newsPost, setNewsPost] = useState([]);
+
+  useEffect(() => {
+    fetch(`/news_posts`)
+      .then((res) => res.json())
+      .then(setNewsPost);
+  }, []);
   return (
     <div className="App">
       {/* To modify this theme change the props in the theme variable */}
@@ -33,7 +42,11 @@ function App() {
         <Navbar />
         {/* Main content Start */}
         <Routes>
-          <Route path="/*" element={<Newsfeed />} />
+          <Route path="/" element={<Newsfeed newsPost={newsPost} />} />
+          <Route
+            path="/news-article/:id"
+            element={<NewsArticle newsPost={newsPost} />}
+          />
         </Routes>
         {/* Main Content End */}
         <Footer />

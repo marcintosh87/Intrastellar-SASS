@@ -4,16 +4,14 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardHeader,
   CardMedia,
-  Container,
-  Grid,
   Typography,
 } from "@mui/material";
 import React from "react";
+import { Link } from "react-router-dom";
 import clap from "./images/blue-clap.png";
 
-export default function NewsCard({ title, content, claps, image, date }) {
+export default function NewsCard({ title, content, claps, image, date, id }) {
   return (
     <Card sx={{ display: "flex", width: 540, m: 2, boxShadow: 0 }}>
       <CardMedia
@@ -33,13 +31,13 @@ export default function NewsCard({ title, content, claps, image, date }) {
             {title}
           </Typography>
           <Typography
-            sx={{ color: "#5F5F5F" }}
+            sx={{ color: "#9B9B9B" }}
             variant="subtitle2"
             align="left"
           >
             {date}
           </Typography>
-          <Typography sx={{ color: "#5F5F5F" }} variant="body2" align="left">
+          <Typography sx={{ color: "#9B9B9B" }} variant="body2" align="left">
             {content}
           </Typography>
         </CardContent>
@@ -48,7 +46,10 @@ export default function NewsCard({ title, content, claps, image, date }) {
             <img src={clap} alt="clap-icon" style={{ width: "40%" }} />
             {claps}
           </Button>
-          <Button color="primary">Read More</Button>
+          <Link to={`/news-article/${id}`} className="react-link">
+            {" "}
+            <Button color="primary">Read More</Button>
+          </Link>
         </CardActions>
       </Box>
     </Card>

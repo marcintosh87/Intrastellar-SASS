@@ -3,13 +3,13 @@ class NewsPostsController < ApplicationController
 
   # GET /news_posts or /news_posts.json
   def index
-    @news_posts = NewsPost.all.order(:created_at)
+    @news_posts = NewsPost.all.order(created_at: :desc)
     render json: @news_posts.with_attached_avatar
   end
 
   # GET /news_posts/1 or /news_posts/1.json
   def show
-    # render json: @news_post
+    render json: @news_post
   end
 
   # GET /news_posts/new

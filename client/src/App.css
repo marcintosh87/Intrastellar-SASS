@@ -56,3 +56,6 @@
   font-size: 27px;
   font-family: "Open Sans", sans-serif;
 }
+.react-link {
+  text-decoration: none;
+}

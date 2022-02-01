@@ -4,7 +4,7 @@ class NewsPostSerializer < ActiveModel::Serializer
   belongs_to :division
 
   def date
-    return self.object.created_at.strftime('%m-%d-%Y')
+    return self.object.created_at.strftime('%b %d %Y')
     
   end
   

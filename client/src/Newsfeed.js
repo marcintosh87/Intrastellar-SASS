@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import hero from "./images/newsfeed-hero.png";
 import video from "./images/ceo-message-placeholder.png";
 import { Box } from "@mui/system";
@@ -25,16 +25,9 @@ const styles = {
   },
 };
 
-export default function Newsfeed() {
+export default function Newsfeed({ newsPost }) {
   const [filter, setFilter] = useState("Sort by");
   const [search, setSearch] = useState("");
-  const [newsPost, setNewsPost] = useState([]);
-
-  useEffect(() => {
-    fetch(`/news_posts`)
-      .then((res) => res.json())
-      .then(setNewsPost);
-  }, []);
 
   const handleChange = (event) => {
     setFilter(event.target.value);
@@ -42,6 +35,10 @@ export default function Newsfeed() {
 
   const handleSearch = (event) => {
     setSearch(event.target.value);
+  };
+
+  const handleClaps = (e) => {
+    "";
   };
   return (
     <>
@@ -155,6 +152,7 @@ export default function Newsfeed() {
             newsPost.map((post) => (
               <NewsCard
                 key={post.id}
+                id={post.id}
                 title={post.title}
                 content={post.content}
                 claps={post.claps}

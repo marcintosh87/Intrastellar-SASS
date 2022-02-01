@@ -6,7 +6,18 @@ import dummyLogo from "./images/dummy-logo.png";
 export default function Navbar() {
   return (
     <>
-      <Box bgcolor={"#00539A"} fullwidth p={3} sx={{ display: "grid" }}>
+      <Box
+        bgcolor={"#00539A"}
+        fullwidth
+        p={3}
+        sx={{
+          display: "grid",
+          //   position: "fixed",
+
+          width: "100%",
+          zIndex: "100",
+        }}
+      >
         <Grid container spacing={2} wrap="wrap">
           <Grid item xs={3}>
             <Link to="/">
@@ -18,7 +29,7 @@ export default function Navbar() {
             </Link>
           </Grid>
           <Grid item xs={8}>
-            <Button variant="text" color="white">
+            <Button href="/" variant="text" color="white">
               Newsfeed
             </Button>
             <Button variant="text" color="white">
