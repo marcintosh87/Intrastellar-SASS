@@ -56,3 +56,8 @@
 .react-link {
   text-decoration: none;
 }
+.section-banner {
+  height: 250px;
+  width: auto;
+  background-color: #09142c;
+}

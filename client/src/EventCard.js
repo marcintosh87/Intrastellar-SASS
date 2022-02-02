@@ -11,7 +11,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import clap from "./images/blue-clap.png";
 
-export default function NewsCard({
+export default function EventCard({
   title,
   content,
   claps,
@@ -20,6 +20,8 @@ export default function NewsCard({
   id,
   refresh,
   setRefresh,
+  location,
+  time,
 }) {
   const [clapsData, setClapsData] = useState({
     claps: claps,
@@ -28,7 +30,7 @@ export default function NewsCard({
   const handleClaps = (e) => {
     // e.preventDefault();
 
-    fetch(`/news_posts/${id}`, {
+    fetch(`/event_posts/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -40,7 +42,7 @@ export default function NewsCard({
           setClapsData({
             claps: claps + 1,
           });
-          setRefresh(refresh + 1);
+          //   setRefresh(refresh + 1);
         });
       } else {
         res.json().then((errors) => {
@@ -50,14 +52,14 @@ export default function NewsCard({
     });
   };
   return (
-    <Card sx={{ display: "flex", width: 540, m: 2, boxShadow: 0 }}>
+    <Card sx={{ display: "flex", width: "90%", m: 2, boxShadow: 0 }}>
       <CardMedia
         component="img"
-        sx={{ width: 200, height: 220, borderRadius: 10 }}
+        sx={{ width: 150, height: 160, borderRadius: 10, m: 1 }}
         image={image}
         alt={title}
       />
-      <Box sx={{ display: "flex", flexDirection: "column", width: 500 }}>
+      <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
         <CardContent sx={{ flex: "1 0 auto" }}>
           <Typography
             component="div"
@@ -72,7 +74,7 @@ export default function NewsCard({
             variant="subtitle2"
             align="left"
           >
-            {date}
+            {`${date} | ${time} | ${location}`}
           </Typography>
           <Typography sx={{ color: "#9B9B9B" }} variant="body2" align="left">
             {content}
@@ -84,7 +86,7 @@ export default function NewsCard({
             {clapsData.claps}
           </Button>
           {/* <Link to={`/news-article/${id}`} className="react-link"> */}
-          <Button href={`/news-article/${id}`} color="primary">
+          <Button href={`/event-article/${id}`} color="primary">
             Read More
           </Button>
           {/* </Link> */}

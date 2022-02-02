@@ -14,8 +14,9 @@ import comment from "./images/comment-icon.png";
 import NewsCard from "./NewsCard";
 import SendIcon from "@mui/icons-material/Send";
 import CommentCard from "./CommentCard";
+import EventCard from "./EventCard";
 
-export default function NewsArticle({ newsPost, loading }) {
+export default function EventArticle({ eventPost, loading }) {
   const [article, setArticle] = useState([]);
   const [value, setValue] = useState("");
   const [loadingArticle, setLoadingArticle] = useState(true);
@@ -24,7 +25,7 @@ export default function NewsArticle({ newsPost, loading }) {
   const params = useParams();
 
   useEffect(() => {
-    fetch(`/news_posts/${params.id}`)
+    fetch(`/event_posts/${params.id}`)
       .then((res) => res.json())
       .then((data) => {
         setArticle(data);
@@ -77,12 +78,12 @@ export default function NewsArticle({ newsPost, loading }) {
             {article.title}
           </Typography>
           <Typography color={"#9B9B9B"} variant="subtitle2" align="left" mt={2}>
-            {article.date}
+            {`${article.date_of_event} | ${article.time} | ${article.event_location}`}
           </Typography>
           <Typography variant="body1" align="left" color={"#9B9B9B"} mt={2}>
             {article.content}
           </Typography>
-          {article.news_comments && (
+          {article.event_comments && (
             <Box mt={3} display={"flex"} alignItems={"flex-start"}>
               <Button>
                 <img src={clap} alt="clap-icon" style={{ width: 20 }} />
@@ -112,7 +113,7 @@ export default function NewsArticle({ newsPost, loading }) {
               mt={4}
               color="secondary"
             >
-              RECENT POSTS
+              UPCOMING EVENTS
             </Typography>
           </Grid>
           <Grid item xs={2}></Grid>
@@ -133,10 +134,10 @@ export default function NewsArticle({ newsPost, loading }) {
         }}
       >
         {!loading &&
-          newsPost
+          eventPost
             .slice(0, 4)
             .map((post) => (
-              <NewsCard
+              <EventCard
                 key={post.id}
                 id={post.id}
                 title={post.title}

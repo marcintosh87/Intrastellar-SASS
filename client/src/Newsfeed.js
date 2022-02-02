@@ -28,6 +28,7 @@ const styles = {
 export default function Newsfeed({ newsPost, refresh, setRefresh }) {
   const [filter, setFilter] = useState("Sort by");
   const [search, setSearch] = useState("");
+  const [postsNum, setPostsNum] = useState(4);
 
   const handleChange = (event) => {
     setFilter(event.target.value);
@@ -148,21 +149,48 @@ export default function Newsfeed({ newsPost, refresh, setRefresh }) {
           }}
         >
           {newsPost &&
-            newsPost.map((post) => (
-              <NewsCard
-                key={post.id}
-                id={post.id}
-                title={post.title}
-                content={post.content}
-                claps={post.claps}
-                image={post.image_post}
-                date={post.date}
-                setRefresh={setRefresh}
-                refresh={refresh}
-              />
-            ))}
+            newsPost
+              .slice(0, postsNum)
+              .map((post) => (
+                <NewsCard
+                  key={post.id}
+                  id={post.id}
+                  title={post.title}
+                  content={post.content}
+                  claps={post.claps}
+                  image={post.image_post}
+                  date={post.date}
+                  setRefresh={setRefresh}
+                  refresh={refresh}
+                />
+              ))}
         </Box>
       </aside>
+      <Box mb={10} sx={{ textAlign: "center" }}>
+        <Button
+          color="secondary"
+          onClick={() => {
+            setPostsNum(postsNum + 4);
+          }}
+        >
+          {"Load More Posts"}
+        </Button>
+
+        {postsNum >= 5 ? (
+          <Button
+            color="secondary"
+            onClick={() => {
+              if (postsNum > 4) {
+                setPostsNum(postsNum - 4);
+              } else {
+                setPostsNum(4);
+              }
+            }}
+          >
+            Show Less
+          </Button>
+        ) : null}
+      </Box>
     </>
   );
 }

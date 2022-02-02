@@ -2,12 +2,16 @@ class EventPostsController < ApplicationController
   before_action :set_event_post, only: %i[ show edit update destroy ]
 
   # GET /event_posts or /event_posts.json
+    # comment out render json below to see the erb
   def index
-    @event_posts = EventPost.all
+    @event_posts = EventPost.all.order(:event_date)
+  
+   render json: @event_posts
   end
 
   # GET /event_posts/1 or /event_posts/1.json
   def show
+    render json: @event_post
   end
 
   # GET /event_posts/new
@@ -36,15 +40,17 @@ class EventPostsController < ApplicationController
 
   # PATCH/PUT /event_posts/1 or /event_posts/1.json
   def update
-    respond_to do |format|
-      if @event_post.update(event_post_params)
-        format.html { redirect_to event_post_url(@event_post), notice: "Event post was successfully updated." }
-        format.json { render :show, status: :ok, location: @event_post }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @event_post.errors, status: :unprocessable_entity }
-      end
-    end
+    @event_post.update(event_post_params)
+    render json: @event_post
+    # respond_to do |format|
+    #   if @event_post.update(event_post_params)
+    #     format.html { redirect_to event_post_url(@event_post), notice: "Event post was successfully updated." }
+    #     format.json { render :show, status: :ok, location: @event_post }
+    #   else
+    #     format.html { render :edit, status: :unprocessable_entity }
+    #     format.json { render json: @event_post.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # DELETE /event_posts/1 or /event_posts/1.json

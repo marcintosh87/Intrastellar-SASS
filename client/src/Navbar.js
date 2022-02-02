@@ -1,6 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import { Avatar, Button, Grid, Link } from "@mui/material";
+import { Link } from "react-router-dom";
+import { Avatar, Button, Grid } from "@mui/material";
 import dummyLogo from "./images/dummy-logo.png";
 
 export default function Navbar() {
@@ -29,12 +30,16 @@ export default function Navbar() {
             </Link>
           </Grid>
           <Grid item xs={8}>
-            <Button href="/" variant="text" color="white">
-              Newsfeed
-            </Button>
-            <Button variant="text" color="white">
-              Upcoming Events
-            </Button>
+            <Link to="/" className="react-link">
+              <Button variant="text" color="white">
+                Newsfeed
+              </Button>
+            </Link>
+            <Link to="/events" className="react-link">
+              <Button variant="text" color="white">
+                Upcoming Events
+              </Button>
+            </Link>
             <Button variant="text" color="white">
               Recognition
             </Button>
