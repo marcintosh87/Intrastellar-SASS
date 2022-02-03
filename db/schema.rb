@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_02_190752) do
+ActiveRecord::Schema.define(version: 2022_02_03_013246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,16 @@ ActiveRecord::Schema.define(version: 2022_02_02_190752) do
     t.index ["organization_id"], name: "index_divisions_on_organization_id"
   end
 
+  create_table "e_comments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "event_post_id", null: false
+    t.text "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_post_id"], name: "index_e_comments_on_event_post_id"
+    t.index ["user_id"], name: "index_e_comments_on_user_id"
+  end
+
   create_table "event_posts", force: :cascade do |t|
     t.string "date_created"
     t.string "title"
@@ -70,14 +80,6 @@ ActiveRecord::Schema.define(version: 2022_02_02_190752) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["division_id"], name: "index_event_posts_on_division_id"
     t.index ["user_id"], name: "index_event_posts_on_user_id"
-  end
-
-  create_table "events_comments", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.text "comment"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_events_comments_on_user_id"
   end
 
   create_table "news_comments", force: :cascade do |t|
@@ -132,9 +134,10 @@ ActiveRecord::Schema.define(version: 2022_02_02_190752) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "divisions", "organizations"
+  add_foreign_key "e_comments", "event_posts"
+  add_foreign_key "e_comments", "users"
   add_foreign_key "event_posts", "divisions"
   add_foreign_key "event_posts", "users"
-  add_foreign_key "events_comments", "users"
   add_foreign_key "news_comments", "news_posts"
   add_foreign_key "news_comments", "users"
   add_foreign_key "news_posts", "divisions"

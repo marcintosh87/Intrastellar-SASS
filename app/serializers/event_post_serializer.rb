@@ -10,12 +10,15 @@ class EventPostSerializer < ActiveModel::Serializer
              :topic,
              :claps,
              :clicks,
-             :image_post
+             :image_post,
+             :event_time,
+             :mail_time,
+             :event_date
             
 
   belongs_to :user
   belongs_to :division
-  # has_many :events_comments
+  has_many :e_comments
 
   
 
@@ -27,6 +30,11 @@ class EventPostSerializer < ActiveModel::Serializer
     return self.object.event_time.utc.strftime("%H:%M")
     
   end
+
+  def mail_time
+    return self.object.event_time.to_formatted_s(:time)
+  end
+  
   
 # Add back when images are ready
   def image_post

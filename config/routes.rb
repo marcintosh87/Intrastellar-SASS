@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :events_comments
+  resources :e_comments
   resources :news_comments
   resources :event_posts
   resources :news_posts

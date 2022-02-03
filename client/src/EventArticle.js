@@ -11,7 +11,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import clap from "./images/blue-clap.png";
 import comment from "./images/comment-icon.png";
-import NewsCard from "./NewsCard";
+
 import SendIcon from "@mui/icons-material/Send";
 import CommentCard from "./CommentCard";
 import EventCard from "./EventCard";
@@ -71,20 +71,30 @@ export default function EventArticle({ eventPost, loading }) {
   };
   return (
     <Box>
+      {/* add to calendar */}
+
       {article && (
         <Container>
           <section style={styles.paperContainer}></section>
           <Typography variant="h4" align="left" mt={2} color={"#5F5F5F"}>
             {article.title}
           </Typography>
+
           <Typography color={"#9B9B9B"} variant="subtitle2" align="left" mt={2}>
             {`${article.date_of_event} | ${article.time} | ${article.event_location}`}
           </Typography>
           <Typography variant="body1" align="left" color={"#9B9B9B"} mt={2}>
             {article.content}
           </Typography>
-          {article.event_comments && (
+
+          {article && (
             <Box mt={3} display={"flex"} alignItems={"flex-start"}>
+              <Button
+                href={`https://outlook.live.com/owa/?path=/calendar/view/Month&rru=addevent&startdt=${article.event_date}${article.mail_time}&enddt=20200214T000000Z&subject=${article.title}+Event&location=${article.event_location}&body=${article.content}`}
+                target={"_blank"}
+              >
+                Add Event to Outlook
+              </Button>
               <Button>
                 <img src={clap} alt="clap-icon" style={{ width: 20 }} />
                 {article.claps}
@@ -95,9 +105,9 @@ export default function EventArticle({ eventPost, loading }) {
                   alt="clap-icon"
                   style={{ width: 20, marginRight: 10 }}
                 />
-                {article.news_comments.length === 1
+                {/* {article.news_comments.length === 1
                   ? ` ${article.news_comments.length} comment `
-                  : ` ${article.news_comments.length} comments `}
+                  : ` ${article.news_comments.length} comments `} */}
               </Button>
             </Box>
           )}
@@ -133,7 +143,7 @@ export default function EventArticle({ eventPost, loading }) {
           ml: 7,
         }}
       >
-        {!loading &&
+        {eventPost &&
           eventPost
             .slice(0, 4)
             .map((post) => (
@@ -144,7 +154,11 @@ export default function EventArticle({ eventPost, loading }) {
                 content={post.content}
                 claps={post.claps}
                 image={post.image_post}
-                date={post.date}
+                date={post.date_of_event}
+                location={post.event_location}
+                event_date={post.event_date}
+                mail_time={post.mail_time}
+                loading={loading}
               />
             ))}
         <Grid container rowSpacing={4} my={4}>
@@ -153,9 +167,9 @@ export default function EventArticle({ eventPost, loading }) {
               Comments
             </Typography>
 
-            {article.news_comments && (
-              <Box id="news_comments">
-                {article.news_comments.map((each) => (
+            {!loading && (
+              <Box id="e_comments">
+                {article.e_comments.map((each) => (
                   <CommentCard
                     key={each.id}
                     comment={each.comment}

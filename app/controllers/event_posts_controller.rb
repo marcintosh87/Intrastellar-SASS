@@ -11,7 +11,11 @@ class EventPostsController < ApplicationController
 
   # GET /event_posts/1 or /event_posts/1.json
   def show
-    render json: @event_post
+
+    # render json: @event_post
+    event = EventPost.find_by(id:params[:id])
+    render json:event
+    # (:include => :e_comments)
   end
 
   # GET /event_posts/new

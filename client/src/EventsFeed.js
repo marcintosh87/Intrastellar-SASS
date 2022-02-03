@@ -101,6 +101,8 @@ export default function EventsFeed({ eventPost }) {
               content={event.content}
               claps={event.claps}
               image={event.image_post}
+              event_date={event.event_date}
+              mail_time={event.mail_time}
             />
           ))}
       </Container>

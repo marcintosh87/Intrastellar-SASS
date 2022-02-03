@@ -49,7 +49,7 @@ export default function Newsfeed({ newsPost, refresh, setRefresh }) {
             <img
               src={video}
               alt=""
-              style={{ width: "100%", margin: "5px 0px" }}
+              style={{ maxWidth: 460, margin: "5px 0px" }}
             />
             <Typography sx={{ fontSize: "14px", fontFamily: "Open Sans" }}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
