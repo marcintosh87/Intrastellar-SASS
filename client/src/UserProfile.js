@@ -126,7 +126,7 @@ export default function UserProfile({ currentUser }) {
           <Routes>
             <Route
               path="user-account"
-              element={<UserAccount />}
+              element={<UserAccount currentUser={currentUser} />}
               activeClassName="active"
             />
             {!loading ? (
