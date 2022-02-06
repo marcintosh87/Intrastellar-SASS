@@ -21,7 +21,7 @@ export default function EmployeeDirCard({
   admin,
 }) {
   return (
-    <Card sx={{ display: "flex", width: "40%", margin: 2 }}>
+    <Card sx={{ display: "flex", width: "460px", margin: 2 }}>
       <CardMedia
         component="img"
         sx={{
@@ -35,7 +35,7 @@ export default function EmployeeDirCard({
         alt="Live from space album cover"
       />
       <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <CardContent sx={{ flex: "1 0 auto" }}>
+        <CardContent>
           <Typography component="div" variant="body1" color={"primary"}>
             {`${firstName} ${lastName} `}
             {admin ? (
