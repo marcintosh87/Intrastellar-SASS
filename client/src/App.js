@@ -11,6 +11,9 @@ import { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 import EventsFeed from "./EventsFeed";
 import EventArticle from "./EventArticle";
+import Login from "./Login";
+import Signup from "./Signup";
+import UserProfile from "./UserProfile";
 
 const theme = createTheme({
   palette: {
@@ -36,7 +39,18 @@ function App() {
   const [refresh, setRefresh] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
-
+  const [currentUser, setCurrentUser] = useState(null);
+  // This allows for the user to remain logged in once authenticated. It must be at the highest level of flow
+  useEffect(() => {
+    fetch("/me").then((res) => {
+      if (res.ok) {
+        res.json().then((user) => {
+          setCurrentUser(user);
+          // setAuthenticated(true);
+        });
+      }
+    });
+  }, []);
   // fetch for News Posts
   useEffect(() => {
     fetch(`/news_posts`)
@@ -77,38 +91,57 @@ function App() {
   return (
     <div className="App">
       {/* To modify this theme change the props in the theme variable */}
-      <ThemeProvider theme={theme}>
-        <Navbar />
-        {/* Main content Start */}
-        {loading === true ? null : (
-          <Routes>
-            <Route
-              path="/events"
-              element={<EventsFeed eventPost={eventPost} />}
-            />
-            <Route
-              path="/event-article/:id"
-              element={<EventArticle eventPost={eventPost} loading={loading} />}
-            />
-            <Route
-              path="/"
-              element={
-                <Newsfeed
-                  newsPost={newsPost}
-                  setRefresh={setRefresh}
-                  refresh={refresh}
-                />
-              }
-            />
-            <Route
-              path="/news-article/:id"
-              element={<NewsArticle newsPost={newsPost} loading={loading} />}
-            />
-          </Routes>
-        )}
-        {/* Main Content End */}
-        <Footer />
-      </ThemeProvider>
+
+      {!currentUser ? (
+        <Routes>
+          <Route path="/" element={<Login setCurrentUser={setCurrentUser} />} />
+          {/* Sign up page doesnt make sense with this model */}
+          {/* <Route
+            path="/sign-up"
+            element={<Signup setCurrentUser={setCurrentUser} />}
+          /> */}
+        </Routes>
+      ) : (
+        <ThemeProvider theme={theme}>
+          <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser} />
+
+          {/* Main content Start */}
+          {loading === true ? null : (
+            <Routes>
+              <Route
+                path="/profile/:id/*"
+                element={<UserProfile currentUser={currentUser} />}
+              />
+              <Route
+                path="/events"
+                element={<EventsFeed eventPost={eventPost} />}
+              />
+              <Route
+                path="/event-article/:id"
+                element={
+                  <EventArticle eventPost={eventPost} loading={loading} />
+                }
+              />
+              <Route
+                path="/"
+                element={
+                  <Newsfeed
+                    newsPost={newsPost}
+                    setRefresh={setRefresh}
+                    refresh={refresh}
+                  />
+                }
+              />
+              <Route
+                path="/news-article/:id"
+                element={<NewsArticle newsPost={newsPost} loading={loading} />}
+              />
+            </Routes>
+          )}
+          {/* Main Content End */}
+          <Footer />
+        </ThemeProvider>
+      )}
     </div>
   );
 }

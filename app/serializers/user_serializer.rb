@@ -7,7 +7,8 @@ class UserSerializer < ActiveModel::Serializer
              :position,
              :active,
              :hire_date,
-             :profile_image
+             :profile_image,
+             :phone
       
 
   belongs_to :division

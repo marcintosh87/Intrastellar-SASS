@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     else
       render json: { error: 'Auth creds not valid' }, status: :unauthorized
     end
-  end
+end
 
   def logout
     session.delete :user_id

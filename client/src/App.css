@@ -61,3 +61,7 @@
   width: auto;
   background-color: #09142c;
 }
+.active {
+  background-color: #00539a;
+  width: 100%;
+}

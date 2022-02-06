@@ -10,7 +10,15 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
-    render json: @user
+ 
+  end
+
+  def me
+    if current_user 
+      render json: current_user, status: :ok 
+  else 
+      render json: "No one is logged in", status: :unauthorized
+  end
   end
 
   # GET /users/new
@@ -75,22 +83,24 @@ class UsersController < ApplicationController
   # Only allow a list of trusted parameters through.
   def user_params
     params
-      .require(:user)
-      .permit(
-        :administrator,
-        :first_name,
-        :last_name,
-        :email,
-        :password,
-        :password_digest,
-        :position,
-        :division,
-        :phone,
-        :extension,
-        :active,
-        :hire_date,
-        :division_id,
-        :avatar,
-      )
+    .require(:user)
+    .permit(
+      :administrator,
+      :first_name,
+      :last_name,
+      :email,
+      :password,
+    
+      :position,
+      :division,
+      :phone,
+      :extension,
+      :active,
+      :hire_date,
+      :division_id,
+      :avatar,
+    )
+
+  
   end
 end

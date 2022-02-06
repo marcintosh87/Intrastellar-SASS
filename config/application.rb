@@ -23,6 +23,7 @@ module Intrastellar
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
+    config.api_only = false
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -37,6 +38,6 @@ module Intrastellar
     config.action_dispatch.cookies_same_site_protection = :strict
 
     # Don't generate system test files.
-    config.generators.system_tests = nil
+    # config.generators.system_tests = nil
   end
 end
