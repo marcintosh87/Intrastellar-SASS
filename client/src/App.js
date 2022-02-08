@@ -117,6 +117,7 @@ function App() {
                     refresh={refresh}
                     newsPost={newsPost}
                     eventPost={eventPost}
+                    loading={loading}
                   />
                 }
               />

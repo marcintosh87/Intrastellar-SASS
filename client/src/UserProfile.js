@@ -8,6 +8,7 @@ import { NavLink } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 import AdminDashboard from "./AdminDashboard";
 import EmployeeDir from "./EmployeeDir";
+import Messages from "./Messages";
 import UserAccount from "./UserAccount";
 
 export default function UserProfile({
@@ -92,7 +93,7 @@ export default function UserProfile({
               </Button>
             </NavLink>
             <hr style={{ width: "90%" }} />
-            {currentUser.administrator ? (
+            {currentUser.administrator && !loading ? (
               <NavLink
                 to={`/profile/${currentUser.id}/admin-dashboard`}
                 className="react-link"
@@ -109,15 +110,19 @@ export default function UserProfile({
             ) : null}
 
             {currentUser.administrator ? <hr style={{ width: "90%" }} /> : null}
-
-            <Button color="white">
-              <i
-                className="fa fa-comment"
-                style={{ fontSize: "25px", marginRight: "5px" }}
-                aria-hidden="true"
-              ></i>{" "}
-              Messages
-            </Button>
+            <NavLink
+              to={`/profile/${currentUser.id}/messages`}
+              className="react-link"
+            >
+              <Button color="white">
+                <i
+                  className="fa fa-comment"
+                  style={{ fontSize: "25px", marginRight: "5px" }}
+                  aria-hidden="true"
+                ></i>{" "}
+                Messages
+              </Button>
+            </NavLink>
             <hr style={{ width: "90%" }} />
 
             <NavLink
@@ -139,7 +144,7 @@ export default function UserProfile({
           <Routes>
             {currentUser.administrator ? (
               <Route
-                path="admin-dashboard"
+                path="admin-dashboard/*"
                 element={
                   <AdminDashboard
                     currentUser={currentUser}
@@ -167,6 +172,13 @@ export default function UserProfile({
               <Route
                 path="employee-directory"
                 element={<EmployeeDir users={users} />}
+                activeClassName="active"
+              />
+            ) : null}
+            {!loading ? (
+              <Route
+                path="messages"
+                element={<Messages currentUser={currentUser} />}
                 activeClassName="active"
               />
             ) : null}

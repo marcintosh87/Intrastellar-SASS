@@ -101,7 +101,14 @@ export default function Navbar({ currentUser, setCurrentUser }) {
               >
                 My Profile
               </MenuItem>
-              <MenuItem onClick={handleClose}>Messages</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  nav(`/profile/${currentUser.id}/messages`);
+                }}
+              >
+                Messages
+              </MenuItem>
               {currentUser.administrator ? (
                 <MenuItem
                   onClick={() => {
