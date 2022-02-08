@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
+import AdminDashboard from "./AdminDashboard";
 import EmployeeDir from "./EmployeeDir";
 import UserAccount from "./UserAccount";
 
@@ -14,6 +15,8 @@ export default function UserProfile({
   setRefresh,
   refresh,
   setCurrentUser,
+  newsPost,
+  eventPost,
 }) {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -90,14 +93,19 @@ export default function UserProfile({
             </NavLink>
             <hr style={{ width: "90%" }} />
             {currentUser.administrator ? (
-              <Button color="white">
-                <i
-                  className="fa fa-tachometer"
-                  style={{ fontSize: "25px", marginRight: "5px" }}
-                  aria-hidden="true"
-                ></i>{" "}
-                Admin Dashboard
-              </Button>
+              <NavLink
+                to={`/profile/${currentUser.id}/admin-dashboard`}
+                className="react-link"
+              >
+                <Button color="white">
+                  <i
+                    className="fa fa-tachometer"
+                    style={{ fontSize: "25px", marginRight: "5px" }}
+                    aria-hidden="true"
+                  ></i>{" "}
+                  Admin Dashboard
+                </Button>
+              </NavLink>
             ) : null}
 
             {currentUser.administrator ? <hr style={{ width: "90%" }} /> : null}
@@ -129,6 +137,20 @@ export default function UserProfile({
         </Box>
         <Box width={"82%"} m={4}>
           <Routes>
+            {currentUser.administrator ? (
+              <Route
+                path="admin-dashboard"
+                element={
+                  <AdminDashboard
+                    currentUser={currentUser}
+                    newsPost={newsPost}
+                    eventPost={eventPost}
+                    setRefresh={setRefresh}
+                    refresh={refresh}
+                  />
+                }
+              />
+            ) : null}
             <Route
               path="user-account"
               element={

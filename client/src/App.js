@@ -1,6 +1,5 @@
 import "./App.css";
 import Navbar from "./Navbar";
-
 import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@emotion/react";
 import Footer from "./Footer";
@@ -12,8 +11,8 @@ import { Typography } from "@mui/material";
 import EventsFeed from "./EventsFeed";
 import EventArticle from "./EventArticle";
 import Login from "./Login";
-import Signup from "./Signup";
 import UserProfile from "./UserProfile";
+import AdminDashboard from "./AdminDashboard";
 
 const theme = createTheme({
   palette: {
@@ -116,6 +115,8 @@ function App() {
                     setCurrentUser={setCurrentUser}
                     setRefresh={setRefresh}
                     refresh={refresh}
+                    newsPost={newsPost}
+                    eventPost={eventPost}
                   />
                 }
               />

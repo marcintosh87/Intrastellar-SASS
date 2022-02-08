@@ -103,7 +103,14 @@ export default function Navbar({ currentUser, setCurrentUser }) {
               </MenuItem>
               <MenuItem onClick={handleClose}>Messages</MenuItem>
               {currentUser.administrator ? (
-                <MenuItem onClick={handleClose}>Admin Dashboard</MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleClose();
+                    nav(`/profile/${currentUser.id}/admin-dashboard`);
+                  }}
+                >
+                  Admin Dashboard
+                </MenuItem>
               ) : null}
               <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>

@@ -348,7 +348,12 @@ export default function UserAccount({
             </Grid>
           </Grid>
           <CardActions>
-            <Button onClick={() => setDisabled(false)}>Edit</Button>
+            {disabled === true ? (
+              <Button onClick={() => setDisabled(false)}>Edit</Button>
+            ) : (
+              <Button onClick={() => setDisabled(true)}>Cancel</Button>
+            )}
+
             <Button type="submit">Submit</Button>
             {submissionMessage && (
               <Fade in={submissionMessage}>
