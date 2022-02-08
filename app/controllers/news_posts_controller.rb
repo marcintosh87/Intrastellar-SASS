@@ -76,6 +76,13 @@ class NewsPostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  # filters
+  def date
+    @news_posts = NewsPost.all.order(:created_at)
+    render json: @news_posts.with_attached_avatar
+    
+  end
+  
 
   private
 

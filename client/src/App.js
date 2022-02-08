@@ -39,6 +39,8 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
   const [currentUser, setCurrentUser] = useState(null);
+  const [users, setUsers] = useState([]);
+  const [newsFilter, setNewsFilter] = useState("news_posts");
   // This allows for the user to remain logged in once authenticated. It must be at the highest level of flow
   useEffect(() => {
     fetch("/me").then((res) => {
@@ -50,9 +52,21 @@ function App() {
       }
     });
   }, [refresh]);
+
+  // get users
+  useEffect(() => {
+    fetch("/users").then((res) => {
+      if (res.ok) {
+        res.json().then((user) => {
+          setUsers(user);
+          // setAuthenticated(true);
+        });
+      }
+    });
+  }, [refresh]);
   // fetch for News Posts
   useEffect(() => {
-    fetch(`/news_posts`)
+    fetch(`/${newsFilter}`)
       .then((res) => res.json())
       .then((data) => {
         setNewsPost(data);
@@ -118,6 +132,7 @@ function App() {
                     newsPost={newsPost}
                     eventPost={eventPost}
                     loading={loading}
+                    users={users}
                   />
                 }
               />
@@ -143,6 +158,7 @@ function App() {
                     setRefresh={setRefresh}
                     refresh={refresh}
                     loading={loading}
+                    setNewsFilter={setNewsFilter}
                   />
                 }
               />

@@ -21,6 +21,7 @@ export default function NewsCard({
   refresh,
   setRefresh,
   loading,
+  setNewsFilter,
 }) {
   const [clapsData, setClapsData] = useState({
     claps: claps,

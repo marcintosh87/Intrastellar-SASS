@@ -178,7 +178,7 @@ export default function UserProfile({
             {!loading ? (
               <Route
                 path="messages"
-                element={<Messages currentUser={currentUser} />}
+                element={<Messages currentUser={currentUser} bUsers={users} />}
                 activeClassName="active"
               />
             ) : null}

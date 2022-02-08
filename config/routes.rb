@@ -14,4 +14,7 @@ Rails.application.routes.draw do
   # sessions
   post '/login', to: 'sessions#login'
   delete '/logout', to: 'sessions#logout'
+
+  # filters
+  get '/news_date', to: 'news_posts#date'
 end

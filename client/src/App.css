@@ -65,3 +65,33 @@
   background-color: #00539a;
   width: 100%;
 }
+
+.ce-chats-container {
+  text-align: center;
+}
+.ce-chats-container input {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.ce-chats-container button {
+  color: #00539a;
+  font-size: 15px;
+  padding: 5px 10px;
+  text-decoration: none;
+  margin-bottom: 10px;
+  background-color: white;
+  border-color: white;
+  box-shadow: none;
+}
+
+.ce-chats-container button:hover {
+  color: #fff;
+  font-size: 15px;
+  padding: 5px 10px;
+  text-decoration: none;
+  margin-bottom: 10px;
+  background-color: #084275;
+  border-color: white;
+  box-shadow: none;
+}

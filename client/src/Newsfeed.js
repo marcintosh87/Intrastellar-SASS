@@ -18,20 +18,28 @@ import NewsCard from "./NewsCard";
 // styles for background
 const styles = {
   paperContainer: {
-    height: "400px",
+    height: "25vh",
     backgroundImage: `url(${hero})`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
   },
 };
 
-export default function Newsfeed({ newsPost, refresh, setRefresh, loading }) {
+export default function Newsfeed({
+  newsPost,
+  refresh,
+  setRefresh,
+  loading,
+  setNewsFilter,
+}) {
   const [filter, setFilter] = useState("Sort by");
   const [search, setSearch] = useState("");
   const [postsNum, setPostsNum] = useState(4);
 
   const handleChange = (event) => {
+    setNewsFilter(event.target.value);
     setFilter(event.target.value);
+    setRefresh(refresh + 1);
   };
 
   const handleSearch = (event) => {
@@ -59,7 +67,12 @@ export default function Newsfeed({ newsPost, refresh, setRefresh, loading }) {
 
           <Grid item xs={1}></Grid>
           <Grid item xs={5} sx={{ mt: 4 }} justifyContent="center">
-            <Typography variant="body1" color={"white"} align="center">
+            <Typography
+              variant="body1"
+              color={"white"}
+              align="center"
+              sx={{ fontSize: "1.7vw" }}
+            >
               We are an outstanding collective of caregivers representing
               various cultures, beliefs, backgrounds, and life experiences.
             </Typography>
@@ -94,18 +107,21 @@ export default function Newsfeed({ newsPost, refresh, setRefresh, loading }) {
           <Grid item xs={2} mt={5.5} px={1}>
             <FormControl fullWidth>
               <InputLabel id="news-feed-select" sx={{ color: "#00539A" }}>
-                Sort by
+                Date (descending)
               </InputLabel>
               <Select
                 labelId="news-feed-select"
                 id="news-feed-select"
+                placeholder="Date (descending)"
                 value={filter}
-                label="Sort by"
+                label="Date (descending)"
                 sx={{ height: "40px" }}
                 onChange={handleChange}
               >
                 <MenuItem value={"Sort by"}></MenuItem>
-                <MenuItem value={"Date"}>Date</MenuItem>
+                <MenuItem value={"news_posts"}>Date (descending)</MenuItem>
+                <MenuItem value={"news_date"}>Date (ascending)</MenuItem>
+
                 <MenuItem value={"Division"}>Department</MenuItem>
               </Select>
             </FormControl>
@@ -163,6 +179,7 @@ export default function Newsfeed({ newsPost, refresh, setRefresh, loading }) {
                   setRefresh={setRefresh}
                   refresh={refresh}
                   loading={loading}
+                  setNewsFilter={setNewsFilter}
                 />
               ))}
         </Box>
