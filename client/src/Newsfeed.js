@@ -25,7 +25,7 @@ const styles = {
   },
 };
 
-export default function Newsfeed({ newsPost, refresh, setRefresh }) {
+export default function Newsfeed({ newsPost, refresh, setRefresh, loading }) {
   const [filter, setFilter] = useState("Sort by");
   const [search, setSearch] = useState("");
   const [postsNum, setPostsNum] = useState(4);
@@ -162,6 +162,7 @@ export default function Newsfeed({ newsPost, refresh, setRefresh }) {
                   date={post.date}
                   setRefresh={setRefresh}
                   refresh={refresh}
+                  loading={loading}
                 />
               ))}
         </Box>

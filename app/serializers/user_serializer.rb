@@ -1,4 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
+  include Rails.application.routes.url_helpers
   attributes :id,
              :first_name,
              :last_name,
@@ -8,6 +9,7 @@ class UserSerializer < ActiveModel::Serializer
              :active,
              :hire_date,
              :profile_image,
+           
              :phone
       
 
@@ -17,7 +19,7 @@ class UserSerializer < ActiveModel::Serializer
  
 
   def profile_image
-    Rails.application.routes.url_helpers.rails_blob_path(self.object.avatar, only_path: true)
+    rails_blob_path(object.avatar, only_path: true) if object.avatar.attached?
   end
 
   def hired

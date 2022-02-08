@@ -16,13 +16,18 @@ import SendIcon from "@mui/icons-material/Send";
 import CommentCard from "./CommentCard";
 import EventCard from "./EventCard";
 
-export default function EventArticle({ eventPost, loading }) {
+export default function EventArticle({ eventPost, loading, currentUser }) {
+  const params = useParams();
   const [article, setArticle] = useState([]);
   const [value, setValue] = useState("");
   const [loadingArticle, setLoadingArticle] = useState(true);
   const [error, setError] = useState();
-
-  const params = useParams();
+  const [refresh, setRefresh] = useState(0);
+  const [comments, setComments] = useState({
+    comment: "",
+    user_id: currentUser.id,
+    event_post_id: params.id,
+  });
 
   useEffect(() => {
     fetch(`/event_posts/${params.id}`)
@@ -32,7 +37,7 @@ export default function EventArticle({ eventPost, loading }) {
         setLoadingArticle(false);
       })
       .catch((error) => setError(error));
-  }, []);
+  }, [refresh]);
   if (loadingArticle) {
     return (
       <Typography variant="caption" color={"primary"}>
@@ -66,8 +71,35 @@ export default function EventArticle({ eventPost, loading }) {
     },
   };
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
+  // Comments Submissions
+  const handleComments = (e) => {
+    setComments({ ...comments, [e.target.name]: e.target.value });
+  };
+
+  const handleCommentsSubmission = (e) => {
+    e.preventDefault();
+    fetch(`/e_comments`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(comments),
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((user) => {
+          setRefresh(refresh + 1);
+          setComments({
+            comment: "",
+            user_id: currentUser.id,
+            event_post_id: params.id,
+          });
+        });
+      } else {
+        res.json().then((errors) => {
+          console.error(errors);
+        });
+      }
+    });
   };
   return (
     <Box>
@@ -99,15 +131,15 @@ export default function EventArticle({ eventPost, loading }) {
                 <img src={clap} alt="clap-icon" style={{ width: 20 }} />
                 {article.claps}
               </Button>
-              <Button href="#news_comments">
+              <Button href="#e_comments">
                 <img
                   src={comment}
                   alt="clap-icon"
                   style={{ width: 20, marginRight: 10 }}
                 />
-                {/* {article.news_comments.length === 1
-                  ? ` ${article.news_comments.length} comment `
-                  : ` ${article.news_comments.length} comments `} */}
+                {article.e_comments.length === 1
+                  ? ` ${article.e_comments.length} comment `
+                  : ` ${article.e_comments.length} comments `}
               </Button>
             </Box>
           )}
@@ -183,19 +215,27 @@ export default function EventArticle({ eventPost, loading }) {
             <Typography variant="h5" align="left" color={"primary"}>
               Post a Comment
             </Typography>
-            <TextField
-              id="outlined-multiline-static"
-              label="Comment"
-              multiline
-              rows={4}
-              onChange={handleChange}
-              fullWidth
-              sx={{ width: "80%", mt: 2 }}
-            />
-            <Box mt={1}>
-              <Button type="submit" variant="contained" endIcon={<SendIcon />}>
-                Send
-              </Button>
+            <Box component="form" onSubmit={handleCommentsSubmission}>
+              <TextField
+                id="outlined-multiline-static"
+                label="Comment"
+                multiline
+                rows={4}
+                onChange={handleComments}
+                fullWidth
+                sx={{ width: "80%", mt: 2 }}
+                name="comment"
+                value={comments.comment}
+              />
+              <Box mt={1}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  endIcon={<SendIcon />}
+                >
+                  Send
+                </Button>
+              </Box>
             </Box>
           </Grid>
         </Grid>

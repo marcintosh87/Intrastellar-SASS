@@ -20,6 +20,7 @@ export default function NewsCard({
   id,
   refresh,
   setRefresh,
+  loading,
 }) {
   const [clapsData, setClapsData] = useState({
     claps: claps,
@@ -83,11 +84,9 @@ export default function NewsCard({
             <img src={clap} alt="clap-icon" style={{ width: "40%" }} />
             {clapsData.claps}
           </Button>
-          {/* <Link to={`/news-article/${id}`} className="react-link"> */}
-          <Button href={`/news-article/${id}`} color="primary">
-            Read More
-          </Button>
-          {/* </Link> */}
+          <Link to={`/news-article/${id}`} className="react-link">
+            <Button color="primary">Read More</Button>
+          </Link>
         </CardActions>
       </Box>
     </Card>

@@ -100,11 +100,9 @@ export default function EventCard({
                 <img src={clap} alt="clap-icon" style={{ width: "40%" }} />
                 {clapsData.claps}
               </Button>
-              {/* <Link to={`/news-article/${id}`} className="react-link"> */}
-              <Button href={`/event-article/${id}`} color="primary">
-                Read More
-              </Button>
-              {/* </Link> */}
+              <Link to={`/event-article/${id}`} className="react-link">
+                <Button color="primary">Read More</Button>
+              </Link>
             </CardActions>
           </Box>
         </Card>

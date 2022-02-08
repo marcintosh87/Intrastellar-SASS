@@ -9,7 +9,12 @@ import { Route, Routes } from "react-router-dom";
 import EmployeeDir from "./EmployeeDir";
 import UserAccount from "./UserAccount";
 
-export default function UserProfile({ currentUser }) {
+export default function UserProfile({
+  currentUser,
+  setRefresh,
+  refresh,
+  setCurrentUser,
+}) {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
@@ -126,7 +131,14 @@ export default function UserProfile({ currentUser }) {
           <Routes>
             <Route
               path="user-account"
-              element={<UserAccount currentUser={currentUser} />}
+              element={
+                <UserAccount
+                  setCurrentUser={setCurrentUser}
+                  currentUser={currentUser}
+                  setRefresh={setRefresh}
+                  refresh={refresh}
+                />
+              }
               activeClassName="active"
             />
             {!loading ? (

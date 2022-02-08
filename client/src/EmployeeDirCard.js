@@ -59,7 +59,7 @@ export default function EmployeeDirCard({
           <br />
           <Typography variant="caption" color={"secondary.dark"}>
             <b>Email: </b>
-            {email}
+            {<a href={`mailto:${email}`}>{email}</a>}
           </Typography>
           <br />
           <Typography variant="caption" color={"secondary.dark"}>

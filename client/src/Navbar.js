@@ -14,6 +14,7 @@ export default function Navbar({ currentUser, setCurrentUser }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const handleLogout = () => {
     fetch("/logout", {
       method: "DELETE",
@@ -23,6 +24,7 @@ export default function Navbar({ currentUser, setCurrentUser }) {
     });
     setCurrentUser(null);
     setAnchorEl(null);
+    nav("/");
   };
   return (
     <>

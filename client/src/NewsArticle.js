@@ -15,13 +15,18 @@ import NewsCard from "./NewsCard";
 import SendIcon from "@mui/icons-material/Send";
 import CommentCard from "./CommentCard";
 
-export default function NewsArticle({ newsPost, loading }) {
+export default function NewsArticle({ newsPost, loading, currentUser }) {
+  const params = useParams();
   const [article, setArticle] = useState([]);
-  const [value, setValue] = useState("");
+
   const [loadingArticle, setLoadingArticle] = useState(true);
   const [error, setError] = useState();
-
-  const params = useParams();
+  const [comments, setComments] = useState({
+    comment: "",
+    user_id: currentUser.id,
+    news_post_id: params.id,
+  });
+  const [refresh, setRefresh] = useState(0);
 
   useEffect(() => {
     fetch(`/news_posts/${params.id}`)
@@ -31,7 +36,7 @@ export default function NewsArticle({ newsPost, loading }) {
         setLoadingArticle(false);
       })
       .catch((error) => setError(error));
-  }, []);
+  }, [refresh]);
   if (loadingArticle) {
     return (
       <Typography variant="caption" color={"primary"}>
@@ -54,6 +59,36 @@ export default function NewsArticle({ newsPost, loading }) {
       </Typography>
     );
   }
+  // Comments Submissions
+  const handleComments = (e) => {
+    setComments({ ...comments, [e.target.name]: e.target.value });
+  };
+
+  const handleCommentsSubmission = (e) => {
+    e.preventDefault();
+    fetch(`/news_comments`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(comments),
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((user) => {
+          setRefresh(refresh + 1);
+          setComments({
+            comment: "",
+            user_id: currentUser.id,
+            news_post_id: params.id,
+          });
+        });
+      } else {
+        res.json().then((errors) => {
+          console.error(errors);
+        });
+      }
+    });
+  };
   const styles = {
     paperContainer: {
       height: "400px",
@@ -65,9 +100,6 @@ export default function NewsArticle({ newsPost, loading }) {
     },
   };
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
   return (
     <Box>
       {article && (
@@ -168,19 +200,27 @@ export default function NewsArticle({ newsPost, loading }) {
             <Typography variant="h5" align="left" color={"primary"}>
               Post a Comment
             </Typography>
-            <TextField
-              id="outlined-multiline-static"
-              label="Comment"
-              multiline
-              rows={4}
-              onChange={handleChange}
-              fullWidth
-              sx={{ width: "80%", mt: 2 }}
-            />
-            <Box mt={1}>
-              <Button type="submit" variant="contained" endIcon={<SendIcon />}>
-                Send
-              </Button>
+            <Box component="form" onSubmit={handleCommentsSubmission}>
+              <TextField
+                id="outlined-multiline-static"
+                label="Comment"
+                multiline
+                rows={4}
+                onChange={handleComments}
+                fullWidth
+                sx={{ width: "80%", mt: 2 }}
+                name="comment"
+                value={comments.comment}
+              />
+              <Box mt={1}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  endIcon={<SendIcon />}
+                >
+                  Send
+                </Button>
+              </Box>
             </Box>
           </Grid>
         </Grid>

@@ -50,7 +50,7 @@ function App() {
         });
       }
     });
-  }, []);
+  }, [refresh]);
   // fetch for News Posts
   useEffect(() => {
     fetch(`/news_posts`)
@@ -110,7 +110,14 @@ function App() {
             <Routes>
               <Route
                 path="/profile/:id/*"
-                element={<UserProfile currentUser={currentUser} />}
+                element={
+                  <UserProfile
+                    currentUser={currentUser}
+                    setCurrentUser={setCurrentUser}
+                    setRefresh={setRefresh}
+                    refresh={refresh}
+                  />
+                }
               />
               <Route
                 path="/events"
@@ -119,7 +126,11 @@ function App() {
               <Route
                 path="/event-article/:id"
                 element={
-                  <EventArticle eventPost={eventPost} loading={loading} />
+                  <EventArticle
+                    eventPost={eventPost}
+                    loading={loading}
+                    currentUser={currentUser}
+                  />
                 }
               />
               <Route
@@ -129,12 +140,19 @@ function App() {
                     newsPost={newsPost}
                     setRefresh={setRefresh}
                     refresh={refresh}
+                    loading={loading}
                   />
                 }
               />
               <Route
                 path="/news-article/:id"
-                element={<NewsArticle newsPost={newsPost} loading={loading} />}
+                element={
+                  <NewsArticle
+                    newsPost={newsPost}
+                    loading={loading}
+                    currentUser={currentUser}
+                  />
+                }
               />
             </Routes>
           )}

@@ -22,17 +22,9 @@ class ECommentsController < ApplicationController
 
   # POST /e_comments or /e_comments.json
   def create
-    @e_comment = EComment.new(e_comment_params)
-
-    respond_to do |format|
-      if @e_comment.save
-        format.html { redirect_to e_comment_url(@e_comment), notice: "E comment was successfully created." }
-        format.json { render :show, status: :created, location: @e_comment }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @e_comment.errors, status: :unprocessable_entity }
-      end
-    end
+    comment = EComment.create(e_comment_params)
+       
+    render json: comment
   end
 
   # PATCH/PUT /e_comments/1 or /e_comments/1.json
