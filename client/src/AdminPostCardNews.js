@@ -63,7 +63,7 @@ export default function AdminPostCardNews({
               style={{ width: 14, marginLeft: 10 }}
             />
             <Typography color={"secondary"}>{clicks}</Typography>
-            <Link to={`/event-article/${id}`} className="react-link">
+            <Link to={`/news-article/${id}`} className="react-link">
               <Button>Read</Button>
             </Link>
             <Button>Edit</Button>

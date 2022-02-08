@@ -12,7 +12,6 @@ import EventsFeed from "./EventsFeed";
 import EventArticle from "./EventArticle";
 import Login from "./Login";
 import UserProfile from "./UserProfile";
-import AdminDashboard from "./AdminDashboard";
 
 const theme = createTheme({
   palette: {
@@ -40,7 +39,7 @@ function App() {
   const [error, setError] = useState();
   const [currentUser, setCurrentUser] = useState(null);
   const [users, setUsers] = useState([]);
-  const [newsFilter, setNewsFilter] = useState("news_posts");
+
   // This allows for the user to remain logged in once authenticated. It must be at the highest level of flow
   useEffect(() => {
     fetch("/me").then((res) => {
@@ -66,7 +65,7 @@ function App() {
   }, [refresh]);
   // fetch for News Posts
   useEffect(() => {
-    fetch(`/${newsFilter}`)
+    fetch(`/news_posts`)
       .then((res) => res.json())
       .then((data) => {
         setNewsPost(data);
@@ -158,10 +157,10 @@ function App() {
                     setRefresh={setRefresh}
                     refresh={refresh}
                     loading={loading}
-                    setNewsFilter={setNewsFilter}
                   />
                 }
               />
+
               <Route
                 path="/news-article/:id"
                 element={

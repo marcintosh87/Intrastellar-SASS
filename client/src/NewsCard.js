@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 import clap from "./images/blue-clap.png";
 
@@ -21,7 +22,6 @@ export default function NewsCard({
   refresh,
   setRefresh,
   loading,
-  setNewsFilter,
 }) {
   const [clapsData, setClapsData] = useState({
     claps: claps,
@@ -85,9 +85,11 @@ export default function NewsCard({
             <img src={clap} alt="clap-icon" style={{ width: "40%" }} />
             {clapsData.claps}
           </Button>
-          <Link to={`/news-article/${id}`} className="react-link">
-            <Button color="primary">Read More</Button>
-          </Link>
+          {/* <Link to={`/news-article/${id}`}> */}
+          <Button color="primary" href={`/news-article/${id}`}>
+            Read More
+          </Button>
+          {/* </Link> */}
         </CardActions>
       </Box>
     </Card>

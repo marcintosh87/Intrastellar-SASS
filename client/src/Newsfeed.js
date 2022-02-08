@@ -25,19 +25,12 @@ const styles = {
   },
 };
 
-export default function Newsfeed({
-  newsPost,
-  refresh,
-  setRefresh,
-  loading,
-  setNewsFilter,
-}) {
+export default function Newsfeed({ newsPost, refresh, setRefresh, loading }) {
   const [filter, setFilter] = useState("Sort by");
   const [search, setSearch] = useState("");
   const [postsNum, setPostsNum] = useState(4);
 
   const handleChange = (event) => {
-    setNewsFilter(event.target.value);
     setFilter(event.target.value);
     setRefresh(refresh + 1);
   };
@@ -179,7 +172,6 @@ export default function Newsfeed({
                   setRefresh={setRefresh}
                   refresh={refresh}
                   loading={loading}
-                  setNewsFilter={setNewsFilter}
                 />
               ))}
         </Box>

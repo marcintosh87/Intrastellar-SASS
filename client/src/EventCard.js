@@ -8,7 +8,8 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 import clap from "./images/blue-clap.png";
 
 export default function EventCard({
@@ -29,6 +30,8 @@ export default function EventCard({
   const [clapsData, setClapsData] = useState({
     claps: claps,
   });
+
+  const nav = useNavigate();
 
   const handleClaps = (e) => {
     // e.preventDefault();
@@ -100,9 +103,12 @@ export default function EventCard({
                 <img src={clap} alt="clap-icon" style={{ width: "40%" }} />
                 {clapsData.claps}
               </Button>
-              <Link to={`/event-article/${id}`} className="react-link">
-                <Button color="primary">Read More</Button>
-              </Link>
+
+              {/* <Link to={`/event-article/${id}`} className="react-link"> */}
+              <Button href={`/event-article/${id}`} color="primary">
+                Read More
+              </Button>
+              {/* </Link> */}
             </CardActions>
           </Box>
         </Card>
