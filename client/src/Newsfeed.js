@@ -25,22 +25,33 @@ const styles = {
   },
 };
 
-export default function Newsfeed({ newsPost, refresh, setRefresh, loading }) {
+export default function Newsfeed({
+  newsPost,
+  refresh,
+  setRefresh,
+  loading,
+  newsPostDateAsc,
+}) {
   const [filter, setFilter] = useState("Sort by");
   const [search, setSearch] = useState("");
   const [postsNum, setPostsNum] = useState(4);
+  const [dataShowed, setDataShowed] = useState(newsPost);
 
   const handleChange = (event) => {
-    setFilter(event.target.value);
+    setDataShowed(event.target.value);
     setRefresh(refresh + 1);
   };
 
   const handleSearch = (event) => {
     const searchWord = event.target.value;
     const newSearch = newsPost.filter((value) => {
-      return value.title.includes(searchWord);
+      return value.title.toLowerCase().includes(searchWord.toLowerCase());
     });
-    setSearch(newSearch);
+    if (searchWord === "") {
+      setSearch("");
+    } else {
+      setSearch(newSearch);
+    }
   };
 
   return (
@@ -116,8 +127,8 @@ export default function Newsfeed({ newsPost, refresh, setRefresh, loading }) {
                 onChange={handleChange}
               >
                 <MenuItem value={"Sort by"}></MenuItem>
-                <MenuItem value={"news_posts"}>Date (descending)</MenuItem>
-                <MenuItem value={"news_date"}>Date (ascending)</MenuItem>
+                <MenuItem value={newsPost}>Date (descending)</MenuItem>
+                <MenuItem value={newsPostDateAsc}>Date (ascending)</MenuItem>
 
                 <MenuItem value={"Division"}>Department</MenuItem>
               </Select>
@@ -160,8 +171,8 @@ export default function Newsfeed({ newsPost, refresh, setRefresh, loading }) {
             ml: 7,
           }}
         >
-          {search.length === 0 && newsPost
-            ? newsPost
+          {search.length === 0 && dataShowed
+            ? dataShowed
                 .slice(0, postsNum)
                 .map((post) => (
                   <NewsCard

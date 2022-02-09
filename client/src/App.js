@@ -39,6 +39,7 @@ function App() {
   const [error, setError] = useState();
   const [currentUser, setCurrentUser] = useState(null);
   const [users, setUsers] = useState([]);
+  const [newsPostDateAsc, setNewsPostDateAsc] = useState([]);
 
   // This allows for the user to remain logged in once authenticated. It must be at the highest level of flow
   useEffect(() => {
@@ -70,6 +71,15 @@ function App() {
       .then((data) => {
         setNewsPost(data);
         setLoading(false);
+      })
+      .catch((error) => setError(error));
+  }, [refresh]);
+
+  useEffect(() => {
+    fetch(`/news_date`)
+      .then((res) => res.json())
+      .then((data) => {
+        setNewsPostDateAsc(data);
       })
       .catch((error) => setError(error));
   }, [refresh]);
@@ -157,6 +167,7 @@ function App() {
                     setRefresh={setRefresh}
                     refresh={refresh}
                     loading={loading}
+                    newsPostDateAsc={newsPostDateAsc}
                   />
                 }
               />
