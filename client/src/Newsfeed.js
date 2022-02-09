@@ -36,7 +36,11 @@ export default function Newsfeed({ newsPost, refresh, setRefresh, loading }) {
   };
 
   const handleSearch = (event) => {
-    setSearch(event.target.value);
+    const searchWord = event.target.value;
+    const newSearch = newsPost.filter((value) => {
+      return value.title.includes(searchWord);
+    });
+    setSearch(newSearch);
   };
 
   return (
@@ -131,10 +135,9 @@ export default function Newsfeed({ newsPost, refresh, setRefresh, loading }) {
             >
               <TextField
                 id="outlined-basic"
-                label="Search"
+                label="Search Title"
                 variant="outlined"
                 size="small"
-                value={search}
                 onChange={handleSearch}
                 InputLabelProps={{
                   style: { color: "#00539A" },
@@ -157,23 +160,39 @@ export default function Newsfeed({ newsPost, refresh, setRefresh, loading }) {
             ml: 7,
           }}
         >
-          {newsPost &&
-            newsPost
-              .slice(0, postsNum)
-              .map((post) => (
-                <NewsCard
-                  key={post.id}
-                  id={post.id}
-                  title={post.title}
-                  content={post.content}
-                  claps={post.claps}
-                  image={post.image_post}
-                  date={post.date}
-                  setRefresh={setRefresh}
-                  refresh={refresh}
-                  loading={loading}
-                />
-              ))}
+          {search.length === 0 && newsPost
+            ? newsPost
+                .slice(0, postsNum)
+                .map((post) => (
+                  <NewsCard
+                    key={post.id}
+                    id={post.id}
+                    title={post.title}
+                    content={post.content}
+                    claps={post.claps}
+                    image={post.image_post}
+                    date={post.date}
+                    setRefresh={setRefresh}
+                    refresh={refresh}
+                    loading={loading}
+                  />
+                ))
+            : search
+                .slice(0, postsNum)
+                .map((post) => (
+                  <NewsCard
+                    key={post.id}
+                    id={post.id}
+                    title={post.title}
+                    content={post.content}
+                    claps={post.claps}
+                    image={post.image_post}
+                    date={post.date}
+                    setRefresh={setRefresh}
+                    refresh={refresh}
+                    loading={loading}
+                  />
+                ))}
         </Box>
       </aside>
       <Box mb={10} sx={{ textAlign: "center" }}>
