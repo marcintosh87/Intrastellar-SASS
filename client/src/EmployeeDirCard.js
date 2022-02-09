@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function EmployeeDirCard({
   firstName,
@@ -19,6 +20,7 @@ export default function EmployeeDirCard({
   phone,
   hireDate,
   admin,
+  currentUser,
 }) {
   return (
     <Card sx={{ display: "flex", width: "460px", margin: 2 }}>
@@ -72,14 +74,29 @@ export default function EmployeeDirCard({
             {hireDate}
           </Typography>
           <CardActions>
-            <i
-              className="fa fa-comment"
-              style={{ fontSize: "25px", marginRight: "5px", color: "#00539A" }}
-              aria-hidden="true"
-            ></i>
-            <Typography color={"primary"} variant={"body1"} fontWeight={"bold"}>
-              Message
-            </Typography>
+            <Link
+              to={`/profile/${currentUser.id}/messages`}
+              className="react-link"
+            >
+              <Box display={"flex"} flexDirection="row">
+                <i
+                  className="fa fa-comment"
+                  style={{
+                    fontSize: "25px",
+                    marginRight: "5px",
+                    color: "#00539A",
+                  }}
+                  aria-hidden="true"
+                ></i>
+                <Typography
+                  color={"primary"}
+                  variant={"body1"}
+                  fontWeight={"bold"}
+                >
+                  Message
+                </Typography>
+              </Box>
+            </Link>
           </CardActions>
         </CardContent>
       </Box>

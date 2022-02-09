@@ -65,7 +65,7 @@ export default function NewsCard({
             component="div"
             variant="h6"
             align="left"
-            sx={{ color: "#5F5F5F" }}
+            sx={{ color: "#5F5F5F", fontSize: "1.5vw" }}
           >
             {title}
           </Typography>

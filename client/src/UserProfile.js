@@ -171,7 +171,9 @@ export default function UserProfile({
             {!loading ? (
               <Route
                 path="employee-directory"
-                element={<EmployeeDir users={users} />}
+                element={
+                  <EmployeeDir users={users} currentUser={currentUser} />
+                }
                 activeClassName="active"
               />
             ) : null}

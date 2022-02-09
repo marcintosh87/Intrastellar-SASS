@@ -166,7 +166,7 @@ export default function Newsfeed({
             flexDirection: "row",
             flexWrap: "wrap",
             alignItems: "flex-start",
-            justifyContent: "flex-start",
+            justifyContent: "center",
             pb: 7,
             ml: 7,
           }}

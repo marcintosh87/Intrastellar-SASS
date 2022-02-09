@@ -113,11 +113,15 @@ export default function AdminDashboard({
         </Box>
         <Stack>
           <Routes>
-            <Route path="/" element={<AdminNewsFeed newsPost={newsPost} />} />
-            <Route
-              path="a-events"
-              element={<AdminEventsFeed eventPost={eventPost} />}
-            />
+            {newsPost && (
+              <Route path="/" element={<AdminNewsFeed newsPost={newsPost} />} />
+            )}
+            {eventPost && (
+              <Route
+                path="a-events"
+                element={<AdminEventsFeed eventPost={eventPost} />}
+              />
+            )}
             <Route path="a-post" />
           </Routes>
         </Stack>
