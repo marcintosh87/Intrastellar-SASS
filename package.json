@@ -1,5 +1,15 @@
 {
   "name": "intrastellar",
+  "description": "Build scripts for Heroku",
+  "engines": {
+    "node": "16.13.0"
+  },
+  "scripts": {
+    "clean": "rm -rf public",
+    "build": "npm install --prefix client && npm run build --prefix client",
+    "deploy": "cp -a client/build/. public/",
+    "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
+  },
   "private": true,
   "dependencies": {
     "@babel/preset-react": "^7.16.7",
