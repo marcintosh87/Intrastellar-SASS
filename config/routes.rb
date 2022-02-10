@@ -17,4 +17,9 @@ Rails.application.routes.draw do
 
   # filters
   get '/news_date', to: 'news_posts#date'
+
+  # this will allow for the deployment to us react
+  get '*path',
+      to: 'fallback#index',
+      constraints: ->(req) { !req.xhr? && req.format.html? }
 end
