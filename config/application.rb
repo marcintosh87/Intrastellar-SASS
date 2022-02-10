@@ -25,6 +25,9 @@ module Intrastellar
     config.load_defaults 6.1
     config.api_only = false
 
+    # NGROK Config
+    # config.hosts << "9f17-66-44-50-42.ngrok.io"
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
@@ -39,5 +42,7 @@ module Intrastellar
 
     # Don't generate system test files.
     # config.generators.system_tests = nil
+
+    
   end
 end
