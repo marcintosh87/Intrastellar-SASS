@@ -41,6 +41,7 @@ class EventPostsController < ApplicationController
       end
     end
   end
+  # delete this
 
   # PATCH/PUT /event_posts/1 or /event_posts/1.json
   def update
