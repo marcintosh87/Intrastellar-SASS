@@ -19,7 +19,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { styled } from "@mui/material/styles";
-import { DirectUpload } from "@rails/activestorage";
 
 export default function UserAccount({
   currentUser,

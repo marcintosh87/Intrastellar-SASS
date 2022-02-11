@@ -9,5 +9,15 @@
     "build": "npm install --prefix client && npm run build --prefix client",
     "deploy": "cp -a client/build/. public/",
     "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
+  },
+  "dependencies": {
+    "@rails/webpacker": "5.4.3",
+    "rails-ujs": "^5.2.6",
+    "turbolinks": "^5.2.0",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.3.12"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3"
   }
 }
