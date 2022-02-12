@@ -1,7 +1,7 @@
 class NewsCommentsController < ApplicationController
     def index
         comment = NewsComment.all
-        render json: comment        
+        render json: comment, each_serializer: NewsCommnetsSerializer 
     end
     def create
         comment = NewsComment.create(comment_params)
@@ -13,7 +13,7 @@ class NewsCommentsController < ApplicationController
         
         comment = NewsComment.find_by(id:params[:id])
         if comment
-            render json: comment
+            render json: comment, each_serializer: NewsCommnetsSerializer 
             
         else
             render json: {error:"No comments"}
@@ -21,6 +21,12 @@ class NewsCommentsController < ApplicationController
 
         
     end
+
+    def destroy
+        comment = NewsComment.find_by(id:params[:id])
+        comment.destroy
+    end
+    
     
     
     private

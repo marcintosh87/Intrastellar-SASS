@@ -16,6 +16,7 @@ class UserSerializer < ActiveModel::Serializer
   belongs_to :division
   has_many :news_posts
   has_many :event_posts
+  has_many :news_comments
  
 
   def profile_image
