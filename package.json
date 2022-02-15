@@ -11,8 +11,6 @@
     "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
   },
   "dependencies": {
-    "@babel/core": "^7.17.4",
-    "@babel/preset-env": "^7.16.11",
     "@rails/activestorage": "^7.0.2-2",
     "@rails/ujs": "^7.0.2-2",
     "@rails/webpacker": "5.4.3",
@@ -23,7 +21,10 @@
     "webpack-cli": "^3.3.12"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.4",
+    "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
+    "babel-loader": "^8.2.3",
     "webpack-dev-server": "^3"
   }
 }
