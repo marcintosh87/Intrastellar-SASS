@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { ChatEngine, getOrCreateChat } from "react-chat-engine";
 
-const Messages = ({ currentUser }) => {
+const Messages = ({ currentUser, messagesUsername }) => {
   const [username, setUsername] = useState("");
 
   function createDirectChat(creds) {
@@ -14,6 +14,14 @@ const Messages = ({ currentUser }) => {
   }
 
   function renderChatForm(creds) {
+    const handleStartChat = (e) => {
+      username === ""
+        ? setUsername(e.target.value)
+        : setUsername(messagesUsername);
+      createDirectChat(creds);
+      setUsername("");
+    };
+
     return (
       <div>
         <input

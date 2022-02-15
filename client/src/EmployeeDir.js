@@ -3,12 +3,19 @@ import { Box } from "@mui/system";
 import React, { useState } from "react";
 import EmployeeDirCard from "./EmployeeDirCard";
 
-export default function EmployeeDir({ users, currentUser }) {
+export default function EmployeeDir({
+  users,
+  currentUser,
+  setMessagesUsername,
+}) {
   const [search, setSearch] = useState("");
   const handleSearch = (event) => {
     const searchWord = event.target.value;
     const newSearch = users.filter((value) => {
-      return value.first_name.toLowerCase().includes(searchWord.toLowerCase());
+      return (
+        value.last_name.toLowerCase().includes(searchWord.toLowerCase()) ||
+        value.first_name.toLowerCase().includes(searchWord.toLowerCase())
+      );
     });
     if (searchWord === "") {
       setSearch("");
@@ -32,7 +39,7 @@ export default function EmployeeDir({ users, currentUser }) {
       >
         <TextField
           id="outlined-basic"
-          label="Search First Name"
+          label="Search Name"
           variant="outlined"
           size="small"
           onChange={handleSearch}

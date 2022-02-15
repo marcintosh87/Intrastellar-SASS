@@ -16,6 +16,7 @@ export default function EventsFeed({ eventPost }) {
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+
   return (
     <>
       <div className="section-banner">
@@ -40,9 +41,9 @@ export default function EventsFeed({ eventPost }) {
                 borderRadius: "16px 0% 0% 16px",
               }}
             >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <MenuItem value={10}>January</MenuItem>
+              <MenuItem value={20}>February</MenuItem>
+              <MenuItem value={30}>March</MenuItem>
             </Select>
           </FormControl>
           <FormControl fullWidth>
@@ -60,9 +61,9 @@ export default function EventsFeed({ eventPost }) {
                 backgroundColor: "#00539A",
               }}
             >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <MenuItem value={10}>Human Resources</MenuItem>
+              <MenuItem value={20}>Marketing</MenuItem>
+              <MenuItem value={30}>Legal</MenuItem>
             </Select>
           </FormControl>
           <FormControl fullWidth>
@@ -81,9 +82,9 @@ export default function EventsFeed({ eventPost }) {
                 borderRadius: " 0% 16px  16px 0% ",
               }}
             >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <MenuItem value={10}>Employee Culture</MenuItem>
+              <MenuItem value={20}>Benefits</MenuItem>
+              <MenuItem value={30}>Employee Outreach</MenuItem>
             </Select>
           </FormControl>
         </Box>
