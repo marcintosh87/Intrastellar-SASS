@@ -21,6 +21,7 @@
     "webpack-cli": "^3.3.12"
   },
   "devDependencies": {
+    "@babel/preset-react": "^7.16.7",
     "webpack-dev-server": "^3"
   }
 }
