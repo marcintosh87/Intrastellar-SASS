@@ -1,4 +1,5 @@
 class NewsPostSerializer < ActiveModel::Serializer
+  include Rails.application.routes.url_helpers
   attributes :id, :title, :content, :division_target, :claps, :clicks, :date, :image_post
   belongs_to :user
   belongs_to :division
@@ -12,6 +13,6 @@ class NewsPostSerializer < ActiveModel::Serializer
   end
   
   def image_post
-    return Rails.application.routes.url_helpers.rails_blob_path(self.object.avatar, only_path: true)
+    return rails_blob_path(object.avatar, only_path: true) if object.avatar.attached?
   end
 end

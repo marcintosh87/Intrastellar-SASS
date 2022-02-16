@@ -22,6 +22,7 @@ export default function UserProfile({
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
+  const [messagesUsername, setMessagesUsername] = useState("");
 
   useEffect(() => {
     fetch(`/users`)
@@ -172,7 +173,11 @@ export default function UserProfile({
               <Route
                 path="employee-directory"
                 element={
-                  <EmployeeDir users={users} currentUser={currentUser} />
+                  <EmployeeDir
+                    users={users}
+                    currentUser={currentUser}
+                    setMessagesUsername={setMessagesUsername}
+                  />
                 }
                 activeClassName="active"
               />
@@ -180,7 +185,13 @@ export default function UserProfile({
             {!loading ? (
               <Route
                 path="messages"
-                element={<Messages currentUser={currentUser} bUsers={users} />}
+                element={
+                  <Messages
+                    currentUser={currentUser}
+                    bUsers={users}
+                    messagesUsername={messagesUsername}
+                  />
+                }
                 activeClassName="active"
               />
             ) : null}

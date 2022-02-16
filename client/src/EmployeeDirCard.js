@@ -21,6 +21,7 @@ export default function EmployeeDirCard({
   hireDate,
   admin,
   currentUser,
+  setMessagesUsername,
 }) {
   return (
     <Card sx={{ display: "flex", width: "460px", margin: 2 }}>
