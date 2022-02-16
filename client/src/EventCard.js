@@ -63,7 +63,7 @@ export default function EventCard({
         <Card sx={{ display: "flex", width: "90%", m: 2, boxShadow: 0 }}>
           <CardMedia
             component="img"
-            sx={{ width: 150, height: 160, borderRadius: 10, m: 1 }}
+            sx={{ width: 150, height: 160, borderRadius: 10, m: 1, }}
             image={image}
             alt={title}
           />

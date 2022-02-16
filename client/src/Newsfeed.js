@@ -18,7 +18,9 @@ import NewsCard from "./NewsCard";
 // styles for background
 const styles = {
   paperContainer: {
-    height: "25vh",
+    width: "100%",
+    height: "35vh",
+   
     backgroundImage: `url(${hero})`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
@@ -58,16 +60,17 @@ export default function Newsfeed({
     <>
       <section style={styles.paperContainer}>
         <Grid container wrap="nowrap">
-          <Grid item xs={5} sx={{ mt: 2, ml: 4 }}>
+        <Grid item xs={1}></Grid>
+          <Grid item xs={4} sx={{  ml: 4, mx: "auto" , mt:5}} >
             <Typography variant="h5" color={"#fff"} align="left">
               A MESSAGE FROM OUR CEO
             </Typography>
             <img
               src={video}
               alt=""
-              style={{ maxWidth: 460, margin: "5px 0px" }}
+              style={{ maxWidth: "90%", margin: "15px 0px",  }}
             />
-            <Typography sx={{ fontSize: "14px", fontFamily: "Open Sans" }}>
+            <Typography sx={{ fontSize: "1.2vh", fontFamily: "Open Sans" }}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </Typography>

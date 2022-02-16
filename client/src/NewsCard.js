@@ -55,7 +55,7 @@ export default function NewsCard({
     <Card sx={{ display: "flex", width: 540, m: 2, boxShadow: 0 }}>
       <CardMedia
         component="img"
-        sx={{ width: 200, height: 220, borderRadius: 10 }}
+        sx={{ width: 200, height: 220, borderRadius: 10,  }}
         image={image}
         alt={title}
       />
