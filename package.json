@@ -11,6 +11,7 @@
     "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
   },
   "dependencies": {
+    "@babel/runtime": "^7.17.2",
     "@rails/activestorage": "^7.0.2-2",
     "@rails/ujs": "^7.0.2-2",
     "@rails/webpacker": "5.4.3",
