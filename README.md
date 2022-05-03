@@ -1,24 +1,5 @@
-# README
+Created using Rails/React/Posgres. This project was created to be an internal communication website for employers. This would allow them to communicate to employees and increase overall employee engagement.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Credentials:
+Username:marcos@company.com
+Password: 123456
